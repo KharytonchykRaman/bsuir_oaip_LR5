@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Функция безопасного ввода целого числа
 bool safeInputInt(int& value) {
     if (cin >> value) {
         return true;
@@ -17,7 +16,6 @@ bool safeInputInt(int& value) {
     }
 }
 
-// Выделение памяти под двумерный массив
 int** allocateMatrix(int n, int k) {
     int** matrix = new int* [n];
     for (int i = 0; i < n; ++i) {
@@ -26,7 +24,6 @@ int** allocateMatrix(int n, int k) {
     return matrix;
 }
 
-// Освобождение памяти
 void freeMatrix(int** matrix, int n) {
     for (int i = 0; i < n; ++i) {
         delete[] matrix[i];
@@ -34,7 +31,6 @@ void freeMatrix(int** matrix, int n) {
     delete[] matrix;
 }
 
-// Ввод матрицы с клавиатуры
 void inputMatrix(int** A, int n, int k) {
     cout << "Введите элементы матрицы " << n << "x" << k << ":\n";
     for (int i = 0; i < n; ++i) {
@@ -49,7 +45,6 @@ void inputMatrix(int** A, int n, int k) {
     }
 }
 
-// Печать матрицы
 void printMatrix(int** A, int n, int k) {
     cout << "\nМатрица:\n";
     for (int i = 0; i < n; ++i) {
@@ -62,26 +57,22 @@ void printMatrix(int** A, int n, int k) {
 
 // Создание массива нечётных элементов из чётных столбцов
 int* createOddFromEvenColumns(int** A, int n, int k, int& size) {
-    // Сначала считаем количество подходящих элементов
     size = 0;
-    for (int j = 0; j < k; j += 2) { // чётные столбцы: 0, 2, 4...
+    for (int j = 0; j < k; j += 2) { 
         for (int i = 0; i < n; ++i) {
-            if (A[i][j] % 2 != 0) { // нечётное значение
+            if (A[i][j] % 2 != 0) { 
                 ++size;
             }
         }
     }
 
-    // Если нет подходящих элементов — возвращаем nullptr
     if (size == 0) {
         return nullptr;
     }
 
-    // Создаём массив
     int* result = new int[size];
     int idx = 0;
 
-    // Заполняем
     for (int j = 0; j < k; j += 2) {
         for (int i = 0; i < n; ++i) {
             if (A[i][j] % 2 != 0) {
@@ -93,10 +84,9 @@ int* createOddFromEvenColumns(int** A, int n, int k, int& size) {
     return result;
 }
 
-// Вычисление среднего арифметического
 double calculateAverage(int* arr, int size) {
     if (size == 0) {
-        return 0.0; // или можно вернуть NaN, но для простоты — 0
+        return 0.0; 
     }
 
     long long sum = 0;
@@ -107,7 +97,6 @@ double calculateAverage(int* arr, int size) {
     return static_cast<double>(sum) / size;
 }
 
-// Печать одномерного массива
 void printArray(int* arr, int size, const string& name) {
     if (size == 0) {
         cout << "\nМассив " << name << " пуст (нет нечётных элементов в чётных столбцах).\n";
@@ -122,7 +111,6 @@ void printArray(int* arr, int size, const string& name) {
     cout << endl;
 }
 
-// Основная функция задания
 void runTask5() {
     int n, k;
     cout << "Введите размеры матрицы n и k: ";
@@ -155,7 +143,6 @@ void runTask5() {
         cout << "Среднее арифметическое: " << avg << endl;
     }
 
-    // Освобождение памяти
     if (oddElements != nullptr) {
         delete[] oddElements;
     }
@@ -216,7 +203,7 @@ void runTests() {
     {
         const int n = 1, k = 1;
         int** A = allocateMatrix(n, k);
-        A[0][0] = 7; // чётный столбец 0, нечётное значение
+        A[0][0] = 7; 
 
         int size = 0;
         int* arr = createOddFromEvenColumns(A, n, k, size);
@@ -235,7 +222,6 @@ void runTests() {
     cout << "\n--- Тестирование завершено ---\n\n";
 }
 
-// Меню
 void showMenu() {
     cout << "\n=== Меню ===\n";
     cout << "1. Выполнить задание 5 (нечётные из чётных столбцов)\n";
