@@ -1,10 +1,11 @@
 #pragma once
 
-#ifdef MYDLL_EXPORTS
-#define MYAPI __declspec(dllexport)
-#else
-#define MYAPI __declspec(dllimport)
-#endif
+extern "C" {
 
-extern "C" MYAPI double sumSquares(int* arr, int start, int end); 
-extern "C" MYAPI void runTask();
+    __declspec(dllexport) double sumSquares(int* arr, int start, int end);
+
+    __declspec(dllexport) void runTask();
+
+    __declspec(dllexport) void runTests();
+
+}

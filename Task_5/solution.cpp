@@ -19,7 +19,7 @@ bool safeInputInt(int& value) {
 int** allocateMatrix(int n, int k) {
     int** matrix = new int* [n];
     for (int i = 0; i < n; ++i) {
-        matrix[i] = new int[k];
+        matrix[i] = new int[k]; 
     }
     return matrix;
 }

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-extern "C" MYAPI double sumSquares(int* arr, int start, int end) {
+double sumSquares(int* arr, int start, int end) {
     int len = end - start + 1;
 
     // Базовый случай: 1 или 2 элемента
@@ -25,7 +25,7 @@ extern "C" MYAPI double sumSquares(int* arr, int start, int end) {
     return leftSum + rightSum;
 }
 
-extern "C" MYAPI void runTask() {
+void runTask() {
     const int N = 27;
     int X[N];
 
@@ -39,4 +39,29 @@ extern "C" MYAPI void runTask() {
     double result = sumSquares(X, 0, N - 1);
 
     cout << "Результат рекурсивной функции: " << result << endl;
+}
+
+void runTests() {
+    cout << "\n=== Запуск встроенных тестов ===\n";
+
+    const int N = 27;
+    int X[N];
+    for (int i = 0; i < N; ++i) {
+        X[i] = i + 1;
+    }
+
+    double result = sumSquares(X, 0, N - 1);
+    double expected = 0.0;
+    for (int i = 0; i < N; ++i) {
+        expected += (i + 1) * (i + 1);
+    }
+
+    if (abs(result - expected) < 1e-9) {
+        cout << "Тест: сумма квадратов для массива 1..27: OK\n";
+    }
+    else {
+        cout << "Тест: FAIL\n";
+    }
+
+    cout << "\n--- Тестирование завершено ---\n\n";
 }
